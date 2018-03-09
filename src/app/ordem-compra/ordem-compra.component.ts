@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PedidoService } from '../pedidos.service';
+import { CarrinhoService } from '../carrinho.service'
 import { Pedido } from '../shared/pedido.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -8,7 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   selector: 'app-ordem-compra',
   templateUrl: './ordem-compra.component.html',
   styleUrls: ['./ordem-compra.component.css'],
-  providers: [PedidoService]
+  providers: [PedidoService, CarrinhoService]
 })
 export class OrdemCompraComponent implements OnInit {
 
@@ -21,9 +22,13 @@ export class OrdemCompraComponent implements OnInit {
 
   public pedido: Pedido
 
-  constructor(private service: PedidoService) { }
+  constructor(
+    private service: PedidoService,
+    private carinhoService: CarrinhoService
+  ) { }
 
   ngOnInit() {
+    console.log('Compra',this.carinhoService.exibirItens());
   }
   confirmarCompra(): void {
     if (!this.formulario.valid) {
