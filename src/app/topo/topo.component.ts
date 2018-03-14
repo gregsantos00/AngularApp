@@ -16,7 +16,7 @@ import '../shared/rxjs-extensions'
 })
 export class TopoComponent implements OnInit {
 
-  private ofertas: Observable<Oferta[]>
+  public ofertas: Observable<Oferta[]>
   private subs: Subject<string> = new Subject<string>()
   //  public listaOfertas : Oferta[];
 

@@ -3,13 +3,14 @@ import { PedidoService } from '../pedidos.service';
 import { CarrinhoService } from '../carrinho.service'
 import { Pedido } from '../shared/pedido.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ItemCarrinho } from '../shared/item-carrinho.model';
 
 
 @Component({
   selector: 'app-ordem-compra',
   templateUrl: './ordem-compra.component.html',
   styleUrls: ['./ordem-compra.component.css'],
-  providers: [PedidoService, CarrinhoService]
+  providers: [PedidoService]
 })
 export class OrdemCompraComponent implements OnInit {
 
@@ -21,14 +22,15 @@ export class OrdemCompraComponent implements OnInit {
   })
 
   public pedido: Pedido
+  public itensCarrinho: ItemCarrinho[] = []
 
   constructor(
     private service: PedidoService,
-    private carinhoService: CarrinhoService
+    public carinhoService: CarrinhoService
   ) { }
 
   ngOnInit() {
-    console.log('Compra',this.carinhoService.exibirItens());
+    this.itensCarrinho = this.carinhoService.exibirItens();
   }
   confirmarCompra(): void {
     if (!this.formulario.valid) {
@@ -47,6 +49,10 @@ export class OrdemCompraComponent implements OnInit {
     this.service.inserirPedido(this.pedido).subscribe((x: number) => {
       this.pedido.id = x;
     })
+  }
+  public removeItem(item: ItemCarrinho): void {
+
+    this.itensCarrinho = this.carinhoService.removeItem(item);
   }
 
 }

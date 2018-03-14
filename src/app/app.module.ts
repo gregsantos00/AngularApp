@@ -25,6 +25,9 @@ import {TextoReduzido} from './shared/texto-redizido.pipe';
 import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
 import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra-sucesso.component'
 
+//Servicos 
+import {CarrinhoService} from '../app/carrinho.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +50,8 @@ import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra
     RouterModule.forRoot(rotas)
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt-PT' }
+    CarrinhoService,
+    {  provide: LOCALE_ID, useValue: 'pt-PT' }
   ],
   bootstrap: [AppComponent]
 })
