@@ -83,7 +83,13 @@
       </div>
 
       <hr />
-      <button type="submit" class="btn btn-primary btn-lg">Cofirmar compra</button>
+      <button 
+        type="submit"
+        class="btn btn-primary btn-lg"
+        [disabled] = "this.carinhoService.totalCarrinho() === 0"
+        >
+        Cofirmar compra
+      </button>
     </form>
   </div>
   <div *ngIf="pedido !== undefined" class="ordem-compra">

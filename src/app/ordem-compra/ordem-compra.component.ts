@@ -44,10 +44,12 @@ export class OrdemCompraComponent implements OnInit {
       this.formulario.value.endereco,
       this.formulario.value.numero,
       this.formulario.value.complemento,
-      this.formulario.value.formaPagamento
+      this.formulario.value.formaPagamento,
+      this.carinhoService.exibirItens()
     )
     this.service.inserirPedido(this.pedido).subscribe((x: number) => {
       this.pedido.id = x;
+      this.carinhoService.limparItens();
     })
   }
   public removeItem(item: ItemCarrinho): void {
